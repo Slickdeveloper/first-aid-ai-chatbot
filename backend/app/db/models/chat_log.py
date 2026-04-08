@@ -1,3 +1,9 @@
+"""Database model for chat logs.
+
+This table records the questions and responses exchanged with the chatbot so the
+project can support audits, demos, and later evaluation work.
+"""
+
 from datetime import datetime
 
 from sqlalchemy import DateTime, Integer, String, Text

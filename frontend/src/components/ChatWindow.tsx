@@ -1,3 +1,7 @@
+// Conversation container.
+//
+// This keeps the empty state, message list, and loading state visually grouped
+// so the chat area feels like one continuous panel.
 import type { ChatMessage } from "../types/chat";
 import { MessageList } from "./MessageList";
 
@@ -8,11 +12,19 @@ type ChatWindowProps = {
 
 export function ChatWindow({ messages, isLoading }: ChatWindowProps) {
   return (
-    <section>
-      <h2>Chat</h2>
+    <section className="chat-window">
       {/* Render the full conversation history in one place. */}
-      <MessageList messages={messages} />
-      {isLoading ? <p>Loading response from approved sources...</p> : null}
+      {messages.length === 0 ? (
+        <div className="empty-chat-state">
+          <p className="empty-chat-title">Welcome to the First Aid AI Chatbot.</p>
+          <p className="muted-text">
+            Ask a first-aid question and get a grounded answer from approved medical sources.
+          </p>
+        </div>
+      ) : (
+        <MessageList messages={messages} />
+      )}
+      {isLoading ? <p className="help-text">Searching approved medical sources...</p> : null}
     </section>
   );
 }

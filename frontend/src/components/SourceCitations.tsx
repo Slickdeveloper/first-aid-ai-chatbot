@@ -1,4 +1,9 @@
+// Citation panel for the latest assistant answer.
+//
+// Keeping citations separate from the message bubble helps users inspect evidence
+// without interrupting the chat flow.
 import type { Citation } from "../types/chat";
+import { SourceCard } from "./SourceCard";
 
 type SourceCitationsProps = {
   citations: Citation[];
@@ -10,19 +15,17 @@ export function SourceCitations({ citations }: SourceCitationsProps) {
   }
 
   return (
-    <section>
-      <h3>Sources</h3>
+    <section className="panel-card">
+      <h3 className="panel-title">Sources / Citations</h3>
       {/* Citations reinforce that medical guidance came from approved material. */}
-      <ul>
+      <div className="source-grid">
         {citations.map((citation) => (
-          <li key={`${citation.organization}-${citation.url}`}>
-            <a href={citation.url} target="_blank" rel="noreferrer">
-              {citation.organization}: {citation.title}
-            </a>
-            <p>{citation.excerpt}</p>
-          </li>
+          <SourceCard
+            key={`${citation.organization}-${citation.url}-${citation.title}`}
+            citation={citation}
+          />
         ))}
-      </ul>
+      </div>
     </section>
   );
 }

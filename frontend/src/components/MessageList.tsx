@@ -1,4 +1,9 @@
+// Conversation history renderer.
+//
+// The page hands message history to this component, which maps each message to
+// a reusable chat bubble.
 import type { ChatMessage } from "../types/chat";
+import { ChatBubble } from "./ChatBubble";
 
 type MessageListProps = {
   messages: ChatMessage[];
@@ -6,12 +11,9 @@ type MessageListProps = {
 
 export function MessageList({ messages }: MessageListProps) {
   return (
-    <div>
+    <div className="message-stack">
       {messages.map((message) => (
-        <article key={message.id}>
-          <strong>{message.role === "user" ? "You" : "Assistant"}</strong>
-          <p>{message.content}</p>
-        </article>
+        <ChatBubble key={message.id} message={message} />
       ))}
     </div>
   );

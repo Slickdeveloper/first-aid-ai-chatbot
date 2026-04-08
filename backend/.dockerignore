@@ -1,0 +1,7 @@
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+first_aid_chatbot.db
+tests

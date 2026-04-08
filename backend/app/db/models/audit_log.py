@@ -1,3 +1,9 @@
+"""Database model for admin audit records.
+
+This is intended for actions that affect trusted medical content, such as approval
+or source updates.
+"""
+
 from datetime import datetime
 
 from sqlalchemy import DateTime, Integer, String, Text

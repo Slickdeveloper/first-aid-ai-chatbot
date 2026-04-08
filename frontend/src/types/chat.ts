@@ -1,3 +1,7 @@
+// Shared chat-related frontend types.
+//
+// These types mirror the backend schema so components and API helpers agree on
+// the shape of messages and replies.
 export type ChatMessage = {
   id: string;
   role: "user" | "assistant";
@@ -17,6 +21,7 @@ export type ChatRequest = {
 };
 
 export type ChatReply = {
+  // Mirrors the backend ChatResponse payload.
   answer: string;
   citations: Citation[];
   disclaimer: string;

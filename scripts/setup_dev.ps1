@@ -1,3 +1,7 @@
+# Development setup helper.
+#
+# This script is intentionally simple: it prints the expected manual setup steps
+# for students working on the project locally.
 Write-Host "Backend:"
 Write-Host "1. Create a virtual environment"
 Write-Host "2. Install backend/requirements.txt"
