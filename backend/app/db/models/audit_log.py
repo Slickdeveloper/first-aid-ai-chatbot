@@ -4,7 +4,7 @@ This is intended for actions that affect trusted medical content, such as approv
 or source updates.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import DateTime, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
@@ -21,4 +21,6 @@ class AuditLog(Base):
     action: Mapped[str] = mapped_column(String(100), index=True)
     target: Mapped[str] = mapped_column(String(255))
     details: Mapped[str] = mapped_column(Text, default="")
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+    )

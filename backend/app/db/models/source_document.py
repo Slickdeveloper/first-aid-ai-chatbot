@@ -4,7 +4,7 @@ This table represents the high-level medical source record that the admin page m
 Each source can have many searchable chunks.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import Boolean, DateTime, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -27,7 +27,9 @@ class SourceDocument(Base):
     content_path: Mapped[str] = mapped_column(String(255))
     summary: Mapped[str] = mapped_column(Text, default="")
     is_approved: Mapped[bool] = mapped_column(Boolean, default=False)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+    )
 
     chunks = relationship(
         "DocumentChunk", back_populates="source_document", cascade="all, delete-orphan"
