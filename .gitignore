@@ -25,6 +25,7 @@ Thumbs.db
 data/processed/
 data/vector_store/
 data/local_db/
+backend/*.db
 
 # Logs
 *.log
