@@ -6,12 +6,29 @@ services:
       context: ..
       dockerfile: backend/Dockerfile
     environment:
-      DATABASE_URL: sqlite:////app/first_aid_chatbot.db
-      CORS_ORIGINS: http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:8080,http://127.0.0.1:8080
-      ALLOW_MOCK_RESPONSES: "true"
-      ADMIN_API_KEY: demo-admin-key-change-me
+      ENVIRONMENT: production
+      DATABASE_URL: ${DATABASE_URL:-sqlite:////app/first_aid_chatbot.db}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:8080,http://127.0.0.1:8080}
+      ALLOW_MOCK_RESPONSES: ${ALLOW_MOCK_RESPONSES:-true}
+      ADMIN_API_KEY: ${ADMIN_API_KEY:-demo-admin-key-change-me}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-5-mini}
+      OPENAI_REASONING_EFFORT: ${OPENAI_REASONING_EFFORT:-low}
     ports:
       - "8000:8000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
     volumes:
       - chatbot_data:/app
 
@@ -20,11 +37,19 @@ services:
       context: ..
       dockerfile: frontend/Dockerfile
       args:
-        VITE_API_BASE_URL: http://localhost:8000
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8000}
     depends_on:
-      - api
+      api:
+        condition: service_healthy
     ports:
       - "8080:80"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1/ >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
 
 volumes:
   chatbot_data:

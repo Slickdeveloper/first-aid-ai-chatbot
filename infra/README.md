@@ -9,7 +9,9 @@ This folder is mainly for packaging and deployment, not for the core chatbot log
 From the repository root:
 
 ```powershell
-docker compose -f infra/docker-compose.yml up --build
+Copy-Item infra/compose.env.example infra/compose.env
+# Edit `infra/compose.env` and replace `ADMIN_API_KEY` before starting.
+docker compose --env-file infra/compose.env -f infra/docker-compose.yml up --build
 ```
 
 This starts:
@@ -21,4 +23,5 @@ This starts:
 
 - The backend accepts `CORS_ORIGINS` as a comma-separated list.
 - The frontend image expects `VITE_API_BASE_URL` at build time.
+- `infra/compose.env.example` provides the supported deployment variables for the Compose stack.
 - SQLite is kept for the current project demo flow. For production, PostgreSQL would be a stronger next step.

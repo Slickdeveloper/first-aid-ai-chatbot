@@ -102,11 +102,20 @@ python scripts/ingest_sources.py
 
 Docker-based deployment files are included in [`infra/docker-compose.yml`](/c:/Users/Ethel/Desktop/FirstAidChatbotProject/infra/docker-compose.yml), [`backend/Dockerfile`](/c:/Users/Ethel/Desktop/FirstAidChatbotProject/backend/Dockerfile), and [`frontend/Dockerfile`](/c:/Users/Ethel/Desktop/FirstAidChatbotProject/frontend/Dockerfile).
 
+For Docker-based deployment, copy [`infra/compose.env.example`](/c:/Users/Ethel/Desktop/FirstAidChatbotProject/infra/compose.env.example) to `infra/compose.env` and replace `ADMIN_API_KEY` with a real value.
+
 If Docker is installed locally:
 
 ```powershell
-docker compose -f infra/docker-compose.yml up --build
+docker compose --env-file infra/compose.env -f infra/docker-compose.yml up --build
 ```
+
+This starts:
+
+- API: `http://localhost:8000`
+- Frontend: `http://localhost:8080`
+
+The Compose stack now includes basic health checks and restart policies for both containers.
 
 ## Current Limitations
 
