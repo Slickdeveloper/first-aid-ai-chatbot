@@ -8,7 +8,9 @@ import type { ChatReply, ChatRequest } from "../types/chat";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ??
-  `${window.location.protocol}//${window.location.hostname}:8000`;
+  (import.meta.env.DEV
+    ? `${window.location.protocol}//${window.location.hostname}:8000`
+    : "");
 const ADMIN_KEY_STORAGE_KEY = "first-aid-admin-key";
 
 function getStoredAdminKey(): string | null {

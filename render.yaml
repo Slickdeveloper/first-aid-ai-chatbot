@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: first-aid-ai-chatbot
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./deploy/Dockerfile.render
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: ADMIN_API_KEY
+        sync: false
+      - key: AUTO_INGEST_SOURCES
+        value: "true"
+      - key: ALLOW_MOCK_RESPONSES
+        value: "true"

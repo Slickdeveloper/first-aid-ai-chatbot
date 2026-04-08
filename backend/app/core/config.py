@@ -27,6 +27,7 @@ class Settings(BaseSettings):
         "http://localhost:8080,http://127.0.0.1:8080"
     )
     admin_api_key: str = Field(default="")
+    auto_ingest_sources: bool = True
     allow_mock_responses: bool = True
     openai_api_key: str | None = None
     openai_model: str = "gpt-5-mini"

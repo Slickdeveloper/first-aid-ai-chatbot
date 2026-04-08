@@ -117,6 +117,12 @@ This starts:
 
 The Compose stack now includes basic health checks and restart policies for both containers.
 
+## Hosted Demo Deployment
+
+For the simplest public deployment, use Render with the checked-in [`render.yaml`](/c:/Users/Ethel/Desktop/FirstAidChatbotProject/render.yaml) blueprint and [`deploy/Dockerfile.render`](/c:/Users/Ethel/Desktop/FirstAidChatbotProject/deploy/Dockerfile.render).
+
+Detailed hosted deployment steps are in [`docs/deployment-render.md`](/c:/Users/Ethel/Desktop/FirstAidChatbotProject/docs/deployment-render.md).
+
 ## Current Limitations
 
 - retrieval is still TF-IDF based rather than embedding-based semantic search
