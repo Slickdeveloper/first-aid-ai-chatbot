@@ -8,18 +8,11 @@ The system follows a retrieval-first architecture:
 
 ## Flowchart Diagram
 
-```mermaid
-flowchart TD
-    A[User enters query] --> B[System processes input]
-    B --> C{Check for emergency keywords}
-    C --> D[Retrieve relevant documents<br/>TF-IDF]
-    D --> E[Generate response]
-    E --> F[Display response with citations]
-```
+![Query processing flow diagram](./assets/query-processing-flow.png)
 
 ## Context Diagram
 
-![Project context diagram](./assets/project-context-diagram.svg)
+![Project context diagram](./assets/project-context-diagram.png)
 
 This design is safer than relying on general model memory because the assistant can answer only from approved content that has been ingested into the system.
 
