@@ -14,6 +14,18 @@ The system follows a retrieval-first architecture:
 
 ![Project context diagram](./assets/project-context-diagram.png)
 
+## Entity Relationship Diagram
+
+![Entity relationship diagram](./assets/entity-relationship-diagram.png)
+
+## Data Flow Diagram
+
+![Data flow diagram](./assets/data-flow-diagram.png)
+
+## Use Case Diagram
+
+![Use case diagram](./assets/use-case-diagram.png)
+
 This design is safer than relying on general model memory because the assistant can answer only from approved content that has been ingested into the system.
 
 In simple terms:
