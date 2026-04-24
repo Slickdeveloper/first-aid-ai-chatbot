@@ -6,6 +6,17 @@ The system follows a retrieval-first architecture:
 
 `User -> React frontend -> FastAPI backend -> safety check -> approved-source retrieval -> grounded answer formatting -> cited response`
 
+## Flowchart Diagram
+
+```mermaid
+flowchart TD
+    A[User enters query] --> B[System processes input]
+    B --> C{Check for emergency keywords}
+    C --> D[Retrieve relevant documents<br/>TF-IDF]
+    D --> E[Generate response]
+    E --> F[Display response with citations]
+```
+
 This design is safer than relying on general model memory because the assistant can answer only from approved content that has been ingested into the system.
 
 In simple terms:
