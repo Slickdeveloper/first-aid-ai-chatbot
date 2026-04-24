@@ -17,6 +17,10 @@ flowchart TD
     E --> F[Display response with citations]
 ```
 
+## Context Diagram
+
+![Project context diagram](./assets/project-context-diagram.svg)
+
 This design is safer than relying on general model memory because the assistant can answer only from approved content that has been ingested into the system.
 
 In simple terms:
